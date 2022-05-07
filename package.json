@@ -1,0 +1,57 @@
+{
+    "name": "@quatico/dom-serializer",
+    "version": "0.3.1",
+    "description": "A DOM serializer for web components",
+    "author": "Quatico Solutions AG",
+    "license": "SEE LICENSE IN LICENSE",
+    "publishConfig": {
+        "registry": "https://binaries.quatico.com/artifactory/api/npm/quatico-private-npm/"
+    },
+    "main": "./bin/index.js",
+    "types": "./bin/index.d.ts",
+    "files": [
+        "LICENSE",
+        "README.md",
+        "bin",
+        "src"
+    ],
+    "scripts": {
+        "clean": "rimraf dist bin coverage",
+        "lint": "eslint \"{src,test}/**/*.{js,ts,tsx}\" --fix",
+        "build": "tsc",
+        "watch": "tsc --watch",
+        "test": "jest --verbose --coverage",
+        "test:update-snapshots": "yarn test -u",
+        "test:watch": "jest --watch",
+        "dist": "cross-env-shell NODE_ENV=production \"yarn clean && yarn lint && yarn license:check && yarn test && yarn build\"",
+        "license:check": "license-check-and-add check -f license-config.json",
+        "license:add": "license-check-and-add add -f license-config.json",
+        "license:remove": "license-check-and-add remove -f license-config.json",
+        "prepublishOnly": "yarn dist",
+        "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags",
+        "publish-npm": "npm publish --access public"
+    },
+    "devDependencies": {
+        "@types/jest": "^27.4.1",
+        "@types/node": "16",
+        "@typescript-eslint/eslint-plugin": "^5.19.0",
+        "@typescript-eslint/parser": "^5.19.0",
+        "concurrently": "7.1.0",
+        "cross-env": "7.0.3",
+        "eslint": "^8.13.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jest": "^26.1.4",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-testing-library": "^5.3.1",
+        "husky": "7.0.4",
+        "jest": "^27.3.1",
+        "license-check-and-add": "4.0.2",
+        "lint-staged": "12.3.8",
+        "prettier": "2.6.2",
+        "rimraf": "3.0.2",
+        "ts-jest": "^27.1.4",
+        "typescript": "^4.6.3"
+    },
+    "dependencies": {}
+}
