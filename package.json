@@ -4,8 +4,12 @@
     "description": "A DOM serializer for web components",
     "author": "Quatico Solutions AG",
     "license": "SEE LICENSE IN LICENSE",
-    "publishConfig": {
-        "registry": "https://binaries.quatico.com/artifactory/api/npm/quatico-private-npm/"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/quatico-solutions/dom-serializer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/quatico-solutions/dom-serializer/issues"
     },
     "main": "./bin/index.js",
     "types": "./bin/index.d.ts",
