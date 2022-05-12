@@ -23,8 +23,7 @@
     "files": [
         "LICENSE",
         "README.md",
-        "bin",
-        "src"
+        "bin"
     ],
     "scripts": {
         "clean": "rimraf dist bin coverage",
