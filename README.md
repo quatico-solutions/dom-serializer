@@ -7,6 +7,8 @@
 
 # @quatico/dom-serializer
 
+[![Node.js Package](https://github.com/quatico-solutions/dom-serializer/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/quatico-solutions/dom-serializer/actions/workflows/npm-publish.yml)
+
 A markup serializer that renders the complete DOM structure, including shadow DOM, into a string. The library can be used as:
 
 1. a snapshot serializer for [Jest](https://jestjs.io),
