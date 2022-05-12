@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn install
+      - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn test
       - run: yarn build
@@ -31,7 +31,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
           scope: '@quatico'
-      - run: yarn dist
+      - run: yarn install --frozen-lockfile
       - run: yarn publish-npm
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
