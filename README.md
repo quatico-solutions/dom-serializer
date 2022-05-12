@@ -9,8 +9,8 @@
 
 A markup serializer that renders the complete DOM structure, including shadow DOM, into a string. The library can be used as:
 
-1. a snapshot serializer for [Jest](https://jestjs.io), as
-2. an imported `renderToString()` function, or as
+1. a snapshot serializer for [Jest](https://jestjs.io),
+2. an imported `renderToString()` function,
 3. an HTML element to show the DOM structure of an element.
 
 ## Install
