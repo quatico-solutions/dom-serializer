@@ -9,7 +9,7 @@
         "testing"
     ],
     "author": "Quatico Solutions AG",
-    "license": "SEE LICENSE IN LICENSE",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/quatico-solutions/dom-serializer.git"
