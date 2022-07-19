@@ -27,6 +27,7 @@
         "**/__snapshots__",
         ".git",
         ".idea",
+        "TODO.md",
         "**/.storybook",
         ".vscode",
         "**/coverage",

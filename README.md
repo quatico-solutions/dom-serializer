@@ -73,11 +73,13 @@ module.exports = {
 
 The class DomSerializer provides the following `RenderOptions` to customize the snapshot:
 
+- `diffable`: Boolean to add extra line breaks for better comparability; defaults to true.
+- `filterAttrs`: Array of lowercase attributes names that are filtered out of the snapshot; defaults to [].
+- `filterTags`: Array of lowercase tag names that are filtered out of the snapshot; defaults to ["style", "script"].
 - `indent`: Initial indent string for resulting structure; defaults to empty string. Child levels are indented by 4 spaces.
-- `shadowDepth`: Number of showRoots to be rendered; defaults to infinity
-- `shadow`: Boolean to enable/disable the rendering of shadow DOM contents; defaults to true
-- `diffable`: Boolean to add extra line breaks for better comparability; defaults to true
-- `filterTags`: Array of lowercase tag names that are filtered out of the snapshot; defaults to ["style", "script"]
+- `shadow`: Boolean to enable/disable the rendering of shadow DOM contents; defaults to true.
+- `shadowDepth`: Number of showRoots to be rendered; defaults to infinity.
+- `shadowRoots`: Controls how shadow roots are rendered. Defaults to "declarative".
 
 ## Render a DOM structure as string
 
@@ -88,7 +90,14 @@ import { renderToString } from "@quatico/dom-serializer";
 
 const htmlElement = ...;
 
-const string = renderToString(htmlElement, { diffable: false, shadow: true, shadowDepth: 1, filterTag: ["script"] });
+const string = renderToString(htmlElement, { 
+        diffable: true,
+        filterAttrs: ["id"],
+        filterTags: ["style", "script"],
+        shadow: true,
+        shadowDepth: 1,
+        shadowRoots: "declarative",
+    });
 ```
 
 Here the same `RenderOptions` as for the `DomSerializer` can be used to customize the resulting string.

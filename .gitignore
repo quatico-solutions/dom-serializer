@@ -1,5 +1,6 @@
 # dependencies
 node_modules
+.npmrc
 
 # testing
 coverage
@@ -28,4 +29,3 @@ storybook-static
 !.idea/modules.xml
 !.idea/prettier.xml
 !.idea/vcs.xml
-

@@ -22,4 +22,5 @@ module.exports = {
         "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
     },
     transformIgnorePatterns: ["node_modules"],
+    resetMocks: true,
 };

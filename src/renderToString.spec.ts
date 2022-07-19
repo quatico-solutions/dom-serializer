@@ -5,10 +5,10 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { create } from "./custom-element";
-import { renderToString } from "./render";
+import { renderToString } from "./renderToString";
 
 describe("renderToString()", () => {
-    it("return outerHTML for single element", () => {
+    it("returns outerHTML for single element", () => {
         const target = create("div", false).root();
 
         const actual = renderToString(target);
@@ -23,10 +23,11 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <p>
                         inside
                     </p>
+                </template>
             </div>"
         `);
     });
@@ -44,7 +45,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <input
                         aria-required=\\"true\\"
                         id=\\"name\\"
@@ -55,6 +56,7 @@ describe("renderToString()", () => {
                         size=\\"10\\"
                         type=\\"text\\"
                      />
+                </template>
             </div>"
         `);
     });
@@ -66,8 +68,9 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <br />
+                </template>
             </div>"
         `);
     });
@@ -91,7 +94,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <a
                         class=\\"link link--display-inline-block link--bg\\"
                         href=\\"expectedUrl\\"
@@ -101,6 +104,7 @@ describe("renderToString()", () => {
                             Whatever
                         
                     </a>
+                </template>
             </div>"
         `);
     });
@@ -115,16 +119,18 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <p>
                         inside
                     </p>
                     <div>
-                        #shadowRoot
+                        <template shadowroot=\\"open\\">
                             <button>
                                 click me I'm inside of a second root
                             </button>
+                        </template>
                     </div>
+                </template>
             </div>"
         `);
     });
@@ -136,10 +142,11 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <p>
                         inside
                     </p>
+                </template>
                 <pre>
                     I'm outside
                 </pre>
@@ -185,11 +192,120 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                #shadowRoot
+                <template shadowroot=\\"open\\">
                     <p>
                         inside
                     </p>
                     <div></div>
+                </template>
+            </div>"
+        `);
+    });
+});
+
+describe("filter tags", () => {
+    it("returns markup with filtered parent tag", () => {
+        const target = create("div")
+            .html(`<p>inside the element</p>`)
+            .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
+            .root();
+
+        const actual = renderToString(target, { filterTags: ["div"] });
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("returns markup without filtered tags", () => {
+        const target = create("div")
+            .html(`<p>inside the element</p>`)
+            .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
+            .root();
+
+        const actual = renderToString(target, { filterTags: ["button", "main"] });
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <p>
+                    inside the element
+                </p>
+            </div>"
+        `);
+    });
+
+    it("returns markup with filtered and non-filtered tags", () => {
+        const target = create("div")
+            .html(`<p>inside the element</p>`)
+            .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
+            .root();
+
+        const actual = renderToString(target, { filterTags: ["button"] });
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <p>
+                    inside the element
+                </p>
+                <main></main>
+            </div>"
+        `);
+    });
+});
+
+describe("filter attributes", () => {
+    it("returns markup without filtered attributes", () => {
+        const target = create("div")
+            .html(`<p id="remove-one">inside the element</p>`)
+            .elements(
+                create("main").html(`<button id="remove-two">click me I'm inside of a second element</button>`).root()
+            )
+            .root();
+
+        const actual = renderToString(target, { filterAttrs: ["id"] });
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <p
+                    
+                >
+                    inside the element
+                </p>
+                <main>
+                    <button
+                        
+                    >
+                        click me I'm inside of a second element
+                    </button>
+                </main>
+            </div>"
+        `);
+    });
+
+    it("returns markup with filtered and non-filtered attributes", () => {
+        const target = create("div")
+            .html(`<p id="remove-one" align="center">inside the element</p>`)
+            .elements(
+                create("main")
+                    .html(`<button class="favorite" id="remove-two">click me I'm inside of a second element</button>`)
+                    .root()
+            )
+            .root();
+
+        const actual = renderToString(target, { filterAttrs: ["id"] });
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <p
+                    align=\\"center\\"
+                >
+                    inside the element
+                </p>
+                <main>
+                    <button
+                        class=\\"favorite\\"
+                    >
+                        click me I'm inside of a second element
+                    </button>
+                </main>
             </div>"
         `);
     });

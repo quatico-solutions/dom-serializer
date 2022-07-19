@@ -4,8 +4,4 @@
  *   Licensed under the MIT License. See LICENSE in the project root for license information.
  * ---------------------------------------------------------------------------------------------
  */
-import createSerializer from "./createSerializer";
-import { DomSerializer } from "./DomSerializer";
-import { renderToString } from "./renderToString";
-
-export { createSerializer, renderToString, DomSerializer };
+export const INDENTATION = "    ";
