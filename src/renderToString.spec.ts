@@ -262,13 +262,11 @@ describe("filter attributes", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                <p 
-                    >
+                <p>
                     inside the element
                 </p>
                 <main>
-                    <button 
-                        >
+                    <button>
                         click me I'm inside of a second element
                     </button>
                 </main>

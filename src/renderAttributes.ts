@@ -7,24 +7,37 @@
 import { INDENTATION } from "./renderIndentation";
 import { RenderOptions } from "./RenderOptions";
 
+type AttributeOptions = {
+    childIndent?: boolean;
+    diffable?: boolean;
+    firstAttribute?: boolean;
+    indent: string;
+    multiLine?: boolean;
+};
+
 export const renderAttributes = (element: Element, { diffable, indent, filterAttrs }: RenderOptions) => {
+    const multiLine = element.attributes?.length > 1;
     if (element.attributes && element.attributes.length > 0) {
         return (
-            renderIndent(diffable, indent, true) +
+            renderIndent({ diffable, indent, multiLine, childIndent: true, firstAttribute: true }) +
             Array.from(element.attributes)
                 .filter(
                     (cur: Attr) => cur.name && (!filterAttrs || filterAttrs?.includes(cur.name.toLowerCase()) === false)
                 )
                 .sort((a: Attr, b: Attr) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
                 .map((attr: Attr) => `${attr.name}="${attr.value}"`)
-                .join(renderIndent(diffable, indent, true)) +
-            renderIndent(diffable, indent).trim()
+                .join(renderIndent({ diffable, indent, multiLine, childIndent: true })) +
+            renderIndent({ diffable, indent, multiLine }).trim()
         );
     }
     return "";
 };
 
-const renderIndent = (diffable: boolean, indent: string, childLevel = false) => {
-    const space = childLevel ? indent + INDENTATION : indent;
-    return diffable ? `\n${space}` : "";
+const renderIndent = ({ diffable, indent, multiLine, childIndent, firstAttribute }: AttributeOptions) => {
+    const lineBreak = multiLine ? "\n" : "";
+    let space = "";
+    if (multiLine) {
+        space = childIndent ? indent + INDENTATION : firstAttribute ? "" : indent;
+    }
+    return diffable ? lineBreak + space : firstAttribute ? "" : " ";
 };
