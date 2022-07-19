@@ -15,6 +15,7 @@
 
 - Feature :sparkles:: Introduce "shadowRoots" option to controls how shadow roots are rendered. Choose from HTML compliant "declarative" shadow roots (default), or "devtools" inspired options.
 - Feature :sparkles:: Introduce "filterAttrs" option to filter attributes from the output. Name the attributes that should be ignored in the snapshot.
+- Feature :sparkles:: Introduce "filterComments" option to remove HTML comments from the output. Defaults to false.
 
 ## v0.3.1
 

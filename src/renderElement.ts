@@ -4,38 +4,29 @@
  *   Licensed under the MIT License. See LICENSE in the project root for license information.
  * ---------------------------------------------------------------------------------------------
  */
+import { isVoidTag } from "./isVoidTag";
+import { renderAttributes } from "./renderAttributes";
 import { renderChildren } from "./renderChildren";
 import { INDENTATION } from "./renderIndentation";
 import { RenderOptions } from "./RenderOptions";
-import { isVoidTag } from "./isVoidTag";
 import { renderShadowContent } from "./renderShadowContent";
 
 /**
  * Renders a given element into a string value, including its shadow DOM, if configured.
  */
 export const renderElement = (element: Element, options: RenderOptions): string => {
-    const { indent, shadowDepth, diffable, filterTags, filterAttrs } = options;
+    const { indent, shadowDepth, filterTags, filterComments } = options;
     const tagName = element.nodeName.toLowerCase() || "";
     if ((filterTags || []).includes(tagName)) {
         return "";
     }
+    if (filterComments && element.nodeType === Node.COMMENT_NODE) {
+        return "";
+    }
 
-    let attributes = "";
     let shadowContent = "";
     let childContent = "";
-
-    if (element.attributes && element.attributes.length > 0) {
-        attributes =
-            (diffable ? `\n${indent + INDENTATION}` : " ") +
-            Array.from(element.attributes)
-                .filter(
-                    (cur: Attr) => cur.name && (!filterAttrs || filterAttrs?.includes(cur.name.toLowerCase()) === false)
-                )
-                .sort((a: Attr, b: Attr) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
-                .map((attr: Attr) => `${attr.name}="${attr.value}"`)
-                .join(diffable ? `\n${indent + INDENTATION}` : " ") +
-            (diffable ? `\n${indent}` : "");
-    }
+    const attributes = renderAttributes(element, options);
 
     if (shadowDepth > 0 && element.shadowRoot && element.shadowRoot.hasChildNodes() && options.shadow !== false) {
         shadowContent = renderShadowContent(
@@ -57,10 +48,10 @@ export const renderElement = (element: Element, options: RenderOptions): string 
     }
 
     if (isVoidTag(tagName)) {
-        return `${indent}<${tagName}${attributes} />`;
+        return `${indent}<${tagName}${attributes ? " " + attributes : ""} />`;
     }
     return (
-        `${indent}<${tagName}${attributes}>` +
+        `${indent}<${tagName}${attributes ? " " + attributes : ""}>` +
         (shadowContent.length > 0 || childContent.length > 0 ? "\n" : "") +
         shadowContent +
         (shadowContent.length > 0 && childContent.length > 0 ? "\n" : "") +

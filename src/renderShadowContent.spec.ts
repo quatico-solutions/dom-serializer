@@ -10,7 +10,7 @@ describe("renderShadowContent", () => {
     it("renders declarative shadow root with default options", () => {
         const target = "EXPECTED";
 
-        const actual = renderShadowContent(target, { indent: "" } as any);
+        const actual = renderShadowContent(target, { indent: "" });
 
         expect(actual).toMatchInlineSnapshot(`
             "    <template shadowroot=\\"open\\">
@@ -22,7 +22,7 @@ describe("renderShadowContent", () => {
     it("renders declarative shadow root with options set 'declarative'", () => {
         const target = "EXPECTED";
 
-        const actual = renderShadowContent(target, { indent: "", shadowRoots: "declarative" } as any);
+        const actual = renderShadowContent(target, { indent: "", shadowRoots: "declarative" });
 
         expect(actual).toMatchInlineSnapshot(`
             "    <template shadowroot=\\"open\\">
@@ -34,7 +34,7 @@ describe("renderShadowContent", () => {
     it("renders devtools shadow root with option set", () => {
         const target = "EXPECTED";
 
-        const actual = renderShadowContent(target, { indent: "", shadowRoots: "devtools" } as any);
+        const actual = renderShadowContent(target, { indent: "", shadowRoots: "devtools" });
 
         expect(actual).toMatchInlineSnapshot(`
             "    #shadowRoot

@@ -10,7 +10,7 @@
 export interface RenderOptions {
     /**
      * Initial indent string for resulting structure. Child levels are indented
-     * by 4 spaces; defaults to empty string
+     * by 4 spaces; defaults to empty string.
      */
     indent: string;
 
@@ -20,28 +20,33 @@ export interface RenderOptions {
     shadowRoots: "declarative" | "devtools";
 
     /**
-     * Number of showRoots to be rendered; defaults to infinity
+     * Number of showRoots to be rendered; defaults to infinity.
      */
     shadowDepth: number;
 
     /**
      * Boolean to enable/disable the rendering of shadow DOM contents; defaults
-     * to true
+     * to true.
      */
     shadow?: boolean;
 
     /**
-     * Boolean to add extra line breaks for better comparablity; defaults to true
+     * Boolean to add extra line breaks for better comparablity; defaults to true.
      */
     diffable: boolean;
 
     /**
-     * Array of lowercase tag names that are filtered out of the snapshot; defaults to ["style", "script"]
+     * Array of lowercase tag names that are filtered out of the snapshot; defaults to ["style", "script"].
      */
     filterTags?: string[];
 
     /**
-     * Array of lowercase attributes names that are filtered out of the snapshot; defaults to []
+     * Flag to filter comment out of the snapshot; defaults to false.
+     */
+    filterComments?: boolean;
+
+    /**
+     * Array of lowercase attributes names that are filtered out of the snapshot; defaults to [].
      */
     filterAttrs?: string[];
 }

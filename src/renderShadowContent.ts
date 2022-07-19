@@ -11,7 +11,7 @@ import { RenderOptions } from "./RenderOptions";
  * Renders a given element string into as shadow content, either as declarative shadow root (HTML compliant)
  * or as a more readable version used by browser devtools.
  */
-export const renderShadowContent = (element: string, { shadowRoots, indent }: RenderOptions): string => {
+export const renderShadowContent = (element: string, { shadowRoots, indent }: Partial<RenderOptions>): string => {
     if (shadowRoots === "devtools") {
         return `${indent + INDENTATION}#shadowRoot\n${element}`;
     }
