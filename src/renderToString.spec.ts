@@ -302,3 +302,38 @@ describe("filter attributes", () => {
         `);
     });
 });
+
+describe("filter comments", () => {
+    it("returns markup without HTML comments by default", () => {
+        const target = create("div")
+            .html(`<!-- comment -->`)
+            .elements(create("main").html(`<!-- comment -->`).root())
+            .root();
+
+        const actual = renderToString(target, { indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <main></main>
+            </div>"
+        `);
+    });
+
+    it("returns markup with HTML comments and filterComments false", () => {
+        const target = create("div")
+            .html(`<!-- comment -->`)
+            .elements(create("main").html(`<!-- comment -->`).root())
+            .root();
+
+        const actual = renderToString(target, { filterComments: false, indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <!-- comment -->
+                <main>
+                    <!-- comment -->
+                </main>
+            </div>"
+        `);
+    });
+});

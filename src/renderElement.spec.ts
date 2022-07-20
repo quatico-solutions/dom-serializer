@@ -186,3 +186,38 @@ describe("filter attributes", () => {
         `);
     });
 });
+
+describe("filter comments", () => {
+    it("returns markup with HTML comments and filterComments true", () => {
+        const target = create("div")
+            .html(`<!-- comment -->`)
+            .elements(create("main").html(`<!-- comment -->`).root())
+            .root();
+
+        const actual = renderElement(target, { filterComments: true, indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <main></main>
+            </div>"
+        `);
+    });
+
+    it("returns markup with HTML comments and filterComments false", () => {
+        const target = create("div")
+            .html(`<!-- comment -->`)
+            .elements(create("main").html(`<!-- comment -->`).root())
+            .root();
+
+        const actual = renderElement(target, { filterComments: false, indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<div>
+                <!-- comment -->
+                <main>
+                    <!-- comment -->
+                </main>
+            </div>"
+        `);
+    });
+});

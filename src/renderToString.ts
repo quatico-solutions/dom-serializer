@@ -20,6 +20,7 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
     const {
         diffable = true,
         filterAttrs = [],
+        filterComments = true,
         filterTags = ["style", "script"],
         indent = "",
         shadow = true,
@@ -31,6 +32,7 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
         return renderElement(element, {
             diffable,
             filterAttrs,
+            filterComments,
             filterTags,
             indent,
             shadow,

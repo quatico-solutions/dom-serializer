@@ -12,10 +12,15 @@ import { renderElement } from "./renderElement";
  */
 export const renderChild = (child: ChildNode, options: RenderOptions): string => {
     switch (child?.nodeType) {
-        case child.ELEMENT_NODE:
+        case Node.ELEMENT_NODE:
             return renderElement(child as Element, options);
-        case child.TEXT_NODE:
+        case Node.TEXT_NODE:
             return options.indent + (child as Text).data;
+        case Node.COMMENT_NODE:
+            if (options.filterComments === false) {
+                return options.indent + `<!--${(child as Comment).textContent}-->`;
+            }
+            return "";
         default:
             return "";
     }

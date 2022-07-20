@@ -15,12 +15,10 @@ import { renderShadowContent } from "./renderShadowContent";
  * Renders a given element into a string value, including its shadow DOM, if configured.
  */
 export const renderElement = (element: Element, options: RenderOptions): string => {
-    const { indent, shadowDepth, filterTags, filterComments } = options;
+    const { indent, shadowDepth, filterTags } = options;
     const tagName = element.nodeName.toLowerCase() || "";
+
     if ((filterTags || []).includes(tagName)) {
-        return "";
-    }
-    if (filterComments && element.nodeType === Node.COMMENT_NODE) {
         return "";
     }
 

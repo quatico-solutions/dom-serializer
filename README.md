@@ -75,7 +75,7 @@ The class DomSerializer provides the following `RenderOptions` to customize the 
 
 - `diffable`: Boolean to add extra line breaks for better comparability; defaults to true.
 - `filterAttrs`: Array of lowercase attributes names that are filtered out of the snapshot; defaults to [].
-- `filterComments`: Flag to filter out HTML comments from the snapshot; defaults to false.
+- `filterComments`: Flag to filter out HTML comments from the snapshot; defaults to true.
 - `filterTags`: Array of lowercase tag names that are filtered out of the snapshot; defaults to ["style", "script"].
 - `indent`: Initial indent string for resulting structure; defaults to empty string. Child levels are indented by 4 spaces.
 - `shadow`: Boolean to enable/disable the rendering of shadow DOM contents; defaults to true.
