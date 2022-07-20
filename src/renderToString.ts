@@ -19,7 +19,6 @@ export type RenderFn = (element: unknown, options?: Partial<RenderOptions>) => s
 export const renderToString: RenderFn = (value: unknown, options: Partial<RenderOptions> = {}): string => {
     const {
         diffable = true,
-        filterAttrs = [],
         filterComments = true,
         filterTags = ["style", "script"],
         indent = "",
@@ -30,8 +29,8 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
     const element = value as Element;
     if (element && element.nodeType === Node.ELEMENT_NODE) {
         return renderElement(element, {
+            ...options,
             diffable,
-            filterAttrs,
             filterComments,
             filterTags,
             indent,

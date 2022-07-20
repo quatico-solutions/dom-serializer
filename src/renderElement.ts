@@ -15,11 +15,16 @@ import { renderShadowContent } from "./renderShadowContent";
  * Renders a given element into a string value, including its shadow DOM, if configured.
  */
 export const renderElement = (element: Element, options: RenderOptions): string => {
-    const { indent, shadowDepth, filterTags } = options;
+    const { indent, shadowDepth, filterTags, shallow } = options;
     const tagName = element.nodeName.toLowerCase() || "";
 
     if ((filterTags || []).includes(tagName)) {
         return "";
+    }
+
+    if (shallow === true && isReactComponent(element)) {
+        const { props, name } = getReactPropNames(element);
+        return `${indent}{ ${name} = { props: ${JSON.stringify(props)} } }`;
     }
 
     let shadowContent = "";
@@ -57,4 +62,22 @@ export const renderElement = (element: Element, options: RenderOptions): string 
         (shadowContent.length > 0 || childContent.length > 0 ? "\n" + indent : "") +
         `</${tagName}>`
     );
+};
+
+type ShallowComponent = {
+    props: any;
+    name: string;
+};
+
+const isReactComponent = (element: Element): boolean =>
+    Object.keys(element).some(key => key.startsWith("__reactProps"));
+
+const getReactPropNames = (element: Element): ShallowComponent => {
+    const propName = Object.keys(element).find(key => key.startsWith("__reactFiber"));
+    // @ts-ignore
+    const props = (element as any)[propName]._debugOwner.memoizedProps;
+    // @ts-ignore
+    const name = (element as any)[propName]._debugOwner.elementType?.name;
+
+    return { props, name };
 };

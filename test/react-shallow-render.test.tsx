@@ -10,7 +10,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
-                { HelloWorld props={ name: "John Doe" } }
+                { HelloWorld = { props: {\\"name\\":\\"John Doe\\"} } }
             </div>"
         `);
     });
