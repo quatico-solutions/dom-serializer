@@ -16,8 +16,8 @@ module.exports = {
     moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
     preset: "ts-jest",
     testEnvironment: "jsdom",
-    testRegex: "src/.*(test|spec)\\.(jsx?|tsx?)$",
-    testURL: "http://localhost/",
+    testRegex: ["src/.*spec\\.tsx?$", "test/.*test\\.tsx?$"],
+    testEnvironmentOptions: { url: "http://localhost/" },
     transform: {
         "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
     },

@@ -31,6 +31,13 @@ export interface RenderOptions {
     shadow?: boolean;
 
     /**
+     * Flag to control shallow rendering or a component. This can be useful to constrain
+     * your snapshot to the components as a unit, i.e. the snapshot does not indirectly
+     * assert behavior of child components. Defaults to false.
+     */
+    shallow?: boolean | Array<JSX.Element> | Array<string>;
+
+    /**
      * Boolean to add extra line breaks for better comparablity; defaults to true.
      */
     diffable: boolean;
