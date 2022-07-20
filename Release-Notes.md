@@ -17,7 +17,7 @@
 - Improvement :gift_heart:: TBD
 - Bugfix :pill:: TBD
 
-## v0.5.0
+## v0.5.1
 
 > 2022-07-20
 
