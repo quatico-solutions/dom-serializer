@@ -12,6 +12,7 @@ type AttributeOptions = {
     diffable?: boolean;
     firstAttribute?: boolean;
     indent: string;
+    lastAttribute?: boolean;
     multiLine?: boolean;
 };
 
@@ -27,17 +28,26 @@ export const renderAttributes = (element: Element, { diffable, indent, filterAtt
                 .sort((a: Attr, b: Attr) => (a.name === b.name ? 0 : a.name > b.name ? 1 : -1))
                 .map((attr: Attr) => `${attr.name}="${attr.value}"`)
                 .join(renderIndent({ diffable, indent, multiLine, childIndent: true })) +
-            renderIndent({ diffable, indent, multiLine }).trim()
+            renderIndent({ diffable, indent, multiLine, lastAttribute: true })
         );
     }
     return "";
 };
 
-const renderIndent = ({ diffable, indent, multiLine, childIndent, firstAttribute }: AttributeOptions) => {
+const renderIndent = ({
+    childIndent,
+    diffable,
+    firstAttribute,
+    indent,
+    lastAttribute,
+    multiLine,
+}: AttributeOptions) => {
     const lineBreak = multiLine ? "\n" : "";
     let space = "";
     if (multiLine) {
         space = childIndent ? indent + INDENTATION : firstAttribute ? "" : indent;
     }
-    return diffable ? lineBreak + space : firstAttribute ? "" : " ";
+    const result = diffable ? lineBreak + space : firstAttribute || lastAttribute ? "" : " ";
+
+    return lastAttribute && !multiLine ? result.trim() : result;
 };

@@ -36,7 +36,8 @@ describe("renderAttributes", () => {
             "
                 align=\\"center\\"
                 class=\\"foo\\"
-                id=\\"bar\\""
+                id=\\"bar\\"
+            "
         `);
     });
 

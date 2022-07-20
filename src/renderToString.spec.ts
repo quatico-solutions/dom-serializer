@@ -54,7 +54,8 @@ describe("renderToString()", () => {
                         name=\\"name\\"
                         required=\\"\\"
                         size=\\"10\\"
-                        type=\\"text\\" />
+                        type=\\"text\\"
+                     />
                 </template>
             </div>"
         `);
@@ -97,7 +98,8 @@ describe("renderToString()", () => {
                     <a 
                         class=\\"link link--display-inline-block link--bg\\"
                         href=\\"expectedUrl\\"
-                        target=\\"_self\\">
+                        target=\\"_self\\"
+                    >
                         
                             Whatever
                         
@@ -289,12 +291,14 @@ describe("filter attributes", () => {
         expect(actual).toMatchInlineSnapshot(`
             "<div>
                 <p 
-                    align=\\"center\\">
+                    align=\\"center\\"
+                >
                     inside the element
                 </p>
                 <main>
                     <button 
-                        class=\\"favorite\\">
+                        class=\\"favorite\\"
+                    >
                         click me I'm inside of a second element
                     </button>
                 </main>
