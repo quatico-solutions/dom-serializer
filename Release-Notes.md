@@ -17,6 +17,14 @@
 - Improvement :gift_heart:: TBD
 - Bugfix :pill:: TBD
 
+## v0.5.2
+
+> 2022-07-20
+
+### Bugfix Release
+
+- Bugfix :pill:: Fixes the alignment of opening and closing sharp brackets for tags with multiple attributes.
+
 ## v0.5.1
 
 > 2022-07-20
