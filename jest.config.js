@@ -21,6 +21,6 @@ module.exports = {
     transform: {
         "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
     },
-    transformIgnorePatterns: ["node_modules"],
+    transformIgnorePatterns: ["node_modules/(?!lit|@lit|@popperjs)"],
     resetMocks: true,
 };
