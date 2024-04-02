@@ -22,14 +22,14 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with string attribute", () => {
@@ -44,21 +44,21 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <input 
-                        aria-required=\\"true\\"
-                        id=\\"name\\"
-                        maxlength=\\"8\\"
-                        minlength=\\"4\\"
-                        name=\\"name\\"
-                        required=\\"\\"
-                        size=\\"10\\"
-                        type=\\"text\\"
-                     />
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <input 
+            aria-required="true"
+            id="name"
+            maxlength="8"
+            minlength="4"
+            name="name"
+            required=""
+            size="10"
+            type="text"
+         />
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with void tag", () => {
@@ -67,12 +67,12 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <br />
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <br />
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with spaces", () => {
@@ -93,20 +93,20 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <a 
-                        class=\\"link link--display-inline-block link--bg\\"
-                        href=\\"expectedUrl\\"
-                        target=\\"_self\\"
-                    >
-                        
-                            Whatever
-                        
-                    </a>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <a 
+            class="link link--display-inline-block link--bg"
+            href="expectedUrl"
+            target="_self"
+        >
+            
+                Whatever
+            
+        </a>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including multiple levels of shadow dom", () => {
@@ -118,21 +118,21 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div>
-                        <template shadowroot=\\"open\\">
-                            <button>
-                                click me I'm inside of a second root
-                            </button>
-                        </template>
-                    </div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div>
+            <template shadowroot="open">
+                <button>
+                    click me I'm inside of a second root
+                </button>
+            </template>
+        </div>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including light-dom children along shadow dom", () => {
@@ -141,17 +141,17 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                </template>
-                <pre>
-                    I'm outside
-                </pre>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+    </template>
+    <pre>
+        I'm outside
+    </pre>
+</div>"
+`);
     });
 
     it("returns only light-dom markup with shadowDepth option set to 0", () => {
@@ -191,15 +191,15 @@ describe("renderToString()", () => {
         const actual = renderToString(target, { shadowDepth: 1 });
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div></div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div></div>
+    </template>
+</div>"
+`);
     });
 });
 
@@ -289,21 +289,21 @@ describe("filter attributes", () => {
         const actual = renderToString(target, { filterAttrs: ["id"] });
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <p 
-                    align=\\"center\\"
-                >
-                    inside the element
-                </p>
-                <main>
-                    <button 
-                        class=\\"favorite\\"
-                    >
-                        click me I'm inside of a second element
-                    </button>
-                </main>
-            </div>"
-        `);
+"<div>
+    <p 
+        align="center"
+    >
+        inside the element
+    </p>
+    <main>
+        <button 
+            class="favorite"
+        >
+            click me I'm inside of a second element
+        </button>
+    </main>
+</div>"
+`);
     });
 });
 

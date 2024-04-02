@@ -75,15 +75,15 @@ describe("renderElement()", () => {
         const actual = renderElement(target, { shadowDepth: 1, indent: "" } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div></div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div></div>
+    </template>
+</div>"
+`);
     });
 });
 
@@ -173,17 +173,17 @@ describe("filter attributes", () => {
         const actual = renderElement(target, { filterAttrs: ["id"], indent: "" } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <p align=\\"center\\">
-                    inside the element
-                </p>
-                <main>
-                    <button class=\\"favorite\\">
-                        click me I'm inside of a second element
-                    </button>
-                </main>
-            </div>"
-        `);
+"<div>
+    <p align="center">
+        inside the element
+    </p>
+    <main>
+        <button class="favorite">
+            click me I'm inside of a second element
+        </button>
+    </main>
+</div>"
+`);
     });
 });
 
