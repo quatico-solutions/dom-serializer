@@ -4,8 +4,9 @@
  *   Licensed under the MIT License. See LICENSE in the project root for license information.
  * ---------------------------------------------------------------------------------------------
  */
-import createSerializer from "./createSerializer";
 import { DomSerializer } from "./DomSerializer";
+import type { RenderOptions } from "./RenderOptions";
+import createSerializer from "./createSerializer";
 import { renderToString } from "./renderToString";
 
-export { createSerializer, renderToString, DomSerializer };
+export { DomSerializer, RenderOptions, createSerializer, renderToString };

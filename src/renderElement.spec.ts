@@ -257,13 +257,13 @@ describe("render w/ slottedContent ignore", () => {
     });
 });
 
-describe("render w/ slottedContent map-contents", () => {
+describe("render w/ slottedContent reveal-contents", () => {
     it("returns slottedContent with default content", () => {
         const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
 
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`
@@ -280,7 +280,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`
@@ -301,7 +301,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`

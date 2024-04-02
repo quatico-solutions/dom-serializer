@@ -4,13 +4,13 @@
  *   Licensed under the MIT License. See LICENSE in the project root for license information.
  * ---------------------------------------------------------------------------------------------
  */
-import { RenderOptions } from "./RenderOptions";
+import { InternalRenderOptions } from "./InternalRenderOptions";
 import { renderElement } from "./renderElement";
 
 /**
  * Renders child node and text content. Ignore everything else.
  */
-export const renderNode = (node: Node, options: RenderOptions): string => {
+export const renderNode = (node: Node, options: InternalRenderOptions): string => {
     switch (node?.nodeType) {
         case Node.ELEMENT_NODE:
             return renderElement(node as Element, options);

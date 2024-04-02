@@ -31,11 +31,12 @@ export interface RenderOptions {
     shadow?: boolean;
 
     /**
-     * Controls how slotted content is rendered. "map-contents" shows it as
-     * referenced child to the slot element. Defaults to "ignore", which
-     * leaves slotted content in original position.
+     * Controls how slotted content is rendered. "reveal-contents" shows it as
+     * referenced child to the slot element as well as in its original position.
+     * "map-contents" moves it into the slot element. Defaults to "ignore", which
+     * leaves slotted content in its original position.
      */
-    slottedContent?: "map-contents" | "ignore";
+    slottedContent?: "reveal-contents" | "map-contents" | "ignore";
 
     /**
      * Boolean to add extra line breaks for better comparablity; defaults to true.
@@ -57,5 +58,5 @@ export interface RenderOptions {
      */
     filterAttrs?: string[];
 
-    withinSlot?: boolean;
+    parentSlot?: HTMLSlotElement;
 }

@@ -351,6 +351,82 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("yields nested map slottedConten", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot name='target'></slot>")
+            .html("<p slot='target'>EXPECTED</p>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("yields mapped slottedContent with nested slot element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<slot></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+
+    it("yields mapped slottedContent with nested slot element and assigned elements", () => {
+        const nested = create("div").html("<slot><p>Whatever</p></slot>").root();
+        const host = create("host-element").shadowHtml("<slot><p>Whatever</p></slot>").elements(nested).root();
+        const target = create("my-target").html("<p>EXPECTED</p>").shadowElements(host).root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`""`);
+    });
+});
+
+describe("render w/ slottedContent reveal-contents", () => {
+    it("nested yie mappe", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
     <template shadowroot="open">
@@ -364,7 +440,7 @@ describe("render w/ slottedContent map-contents", () => {
 `);
     });
 
-    it("returns slottedContent with matching named slot", () => {
+    it("yields nested map slottedConten", () => {
         const target = create("host-element")
             .shadowHtml("<slot name='target'></slot>")
             .html("<p slot='target'>EXPECTED</p>")
@@ -372,7 +448,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         const actual = renderToString(target, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`
@@ -385,6 +461,9 @@ describe("render w/ slottedContent map-contents", () => {
                 </p>
         </slot>
     </template>
+    <p slot="target">
+        EXPECTED
+    </p>
 </host-element>"
 `);
     });
@@ -394,7 +473,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         const actual = renderToString(target, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`
@@ -407,6 +486,9 @@ describe("render w/ slottedContent map-contents", () => {
                 </p>
         </slot>
     </template>
+    <p>
+        EXPECTED
+    </p>
 </host-element>"
 `);
     });
@@ -419,7 +501,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         const actual = renderToString(target, {
             indent: "",
-            slottedContent: "map-contents",
+            slottedContent: "reveal-contents",
         } as any);
 
         expect(actual).toMatchInlineSnapshot(`
@@ -438,7 +520,81 @@ describe("render w/ slottedContent map-contents", () => {
                 </div>
         </slot>
     </template>
+    <div>
+        One
+    </div>
+    <div>
+        Two
+    </div>
+    <div>
+        Three
+    </div>
 </host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<slot></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <slot></slot>
+        </slot>
+    </template>
+    <slot></slot>
+</host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element and assigned elements", () => {
+        const nested = create("div").html("<slot><p>Whatever</p></slot>").root();
+        const host = create("host-element").shadowHtml("<slot><p>Whatever</p></slot>").elements(nested).root();
+        const target = create("my-target").html("<p>EXPECTED</p>").shadowElements(host).root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<my-target>
+    <template shadowroot="open">
+        <host-element>
+            <template shadowroot="open">
+                <slot>
+                    #contents
+                        <div>
+                            <slot>
+                                #contents
+                                    <p>
+                                        EXPECTED
+                                    </p>
+                            </slot>
+                        </div>
+                </slot>
+            </template>
+            <div>
+                <slot>
+                    #contents
+                        <p>
+                            EXPECTED
+                        </p>
+                </slot>
+            </div>
+        </host-element>
+    </template>
+    <p>
+        EXPECTED
+    </p>
+</my-target>"
 `);
     });
 });
