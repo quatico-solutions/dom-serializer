@@ -5,14 +5,14 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { RenderOptions } from "./RenderOptions";
-import { renderChild } from "./renderChild";
+import { renderNode } from "./renderNode";
 
 /**
  * Render all child nodes recursively of a given element or shadow root.
  */
 export const renderChildren = (element: Element | ShadowRoot, options: RenderOptions): string => {
     return Array.from(element?.childNodes || [])
-        .map(child => renderChild(child, options))
+        .map(child => renderNode(child, options))
         .filter(it => it.trim().length > 0)
         .join("\n");
 };
