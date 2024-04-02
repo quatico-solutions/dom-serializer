@@ -341,3 +341,104 @@ describe("filter comments", () => {
         `);
     });
 });
+
+describe("render w/ slottedContent map-contents", () => {
+    it("returns slottedContent with default content", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            <p>
+                EXPECTED
+            </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with matching named slot", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot name='target'></slot>")
+            .html("<p slot='target'>EXPECTED</p>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot name="target">
+            #contents
+                <p slot="target">
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <p>
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <div>
+                    One
+                </div>
+                <div>
+                    Two
+                </div>
+                <div>
+                    Three
+                </div>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+});

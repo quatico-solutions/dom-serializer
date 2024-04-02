@@ -81,6 +81,7 @@ The class DomSerializer provides the following `RenderOptions` to customize the 
 - `shadow`: Boolean to enable/disable the rendering of shadow DOM contents; defaults to true.
 - `shadowDepth`: Number of showRoots to be rendered; defaults to infinity.
 - `shadowRoots`: Controls how shadow roots are rendered. Defaults to "declarative".
+- `slottedContent`: Controls how slotted content is rendered. Show it as referenced child to the slot element. Defaults to "ignore".
 
 ## Render a DOM structure as string
 

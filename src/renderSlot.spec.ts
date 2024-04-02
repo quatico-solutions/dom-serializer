@@ -28,10 +28,11 @@ describe('renderSlot()', () => {
 
 
         expect(actual).toMatchInlineSnapshot(`
-            "<p>
-                EXPECTED
-            </p>"
-        `);
+"#contents
+    <p>
+        EXPECTED
+    </p>"
+`);
     });
 
     it("returns slottedContent with multiple slotted elements", () => {
@@ -40,15 +41,16 @@ describe('renderSlot()', () => {
         const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                One
-            </div>
-            <div>
-                Two
-            </div>
-            <div>
-                Three
-            </div>"
-        `);
+"#contents
+    <div>
+        One
+    </div>
+    <div>
+        Two
+    </div>
+    <div>
+        Three
+    </div>"
+`);
     });
 });

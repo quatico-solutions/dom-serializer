@@ -5,13 +5,19 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { RenderOptions } from "./RenderOptions";
+import { renderChildren } from "./renderChildren";
 import { renderNodes } from "./renderNodes";
+import { INDENTATION } from "./renderIndentation";
 
 /**
  * Render all assignedNodes or default content for slot elements.
  */
-export const renderSlot = (element: HTMLSlotElement, options: RenderOptions): string => 
-    element?.assignedNodes().length > 0 
-        ? renderNodes(element?.assignedNodes(), options) 
-        : renderNodes(element?.childNodes, options);
+export const renderSlot = (element: HTMLSlotElement, options: RenderOptions): string => {
+    const indent = options.indent || "";
 
+    if (element?.assignedNodes().length > 0) {
+        return `${indent}#contents\n${renderNodes(element?.assignedNodes(), { ...options, indent: indent + INDENTATION, withinSlot: true })}`;
+    } else {
+        return renderChildren(element, options);
+    }
+};
