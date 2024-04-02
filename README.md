@@ -20,7 +20,7 @@ A markup serializer that renders the complete DOM structure, including shadow DO
 Add the `@quatico/dom-serializer` as (dev-) dependency to your project
 
 ```sh
-yarn add -D @quatico/dom-serializer
+pnpm add -D @quatico/dom-serializer
 ```
 
 ## Jest Serializer

@@ -31,13 +31,14 @@
         "build": "tsc",
         "watch": "tsc --watch",
         "test": "jest --verbose --coverage",
-        "test:update-snapshots": "yarn test -u",
+        "test:update-snapshots": "pnpm test -u",
         "test:watch": "jest --watch",
-        "dist": "cross-env-shell NODE_ENV=production \"yarn clean && yarn lint && yarn license:check && yarn test && yarn build\"",
+        "dist": "cross-env-shell NODE_ENV=production \"pnpm clean && pnpm lint && pnpm license:check && pnpm test && pnpm build\"",
         "license:check": "license-check-and-add check -f license-config.json",
         "license:add": "license-check-and-add add -f license-config.json",
         "license:remove": "license-check-and-add remove -f license-config.json",
-        "prepublishOnly": "yarn dist",
+        "preinstall": "npx only-allow pnpm",
+        "prepublishOnly": "pnpm dist",
         "publish-npm": "npm publish --access public"
     },
     "devDependencies": {
@@ -62,5 +63,9 @@
         "rimraf": "5.0.5",
         "ts-jest": "^29.1.2",
         "typescript": "^5.4.3"
+    },
+    "engines": {
+        "node": ">=20",
+        "pnpm": ">=8"
     }
 }
