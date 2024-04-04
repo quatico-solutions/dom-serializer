@@ -7,15 +7,23 @@
 
 # Releases
 
-## v0.6.0
+## v0.7.0
 
 > in development
 
-### Shallow Rendering
+### TBD
 
 - Feature :sparkles:: TBD
 - Improvement :gift_heart:: TBD
 - Bugfix :pill:: TBD
+
+## v0.6.0
+
+> 2024-04-04
+
+### Rendering of slotted content
+
+- Feature :sparkles:: Provides new options to render slotted content within slots.
 
 ## v0.5.2
 
