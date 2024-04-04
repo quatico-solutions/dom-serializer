@@ -23,7 +23,7 @@ export const renderElement = (element: Element, options: InternalRenderOptions):
         return "";
     }
 
-    if (slottedContent === "map-contents" && element.assignedSlot !== parentSlot) {
+    if (slottedContent === "map-contents" && !!element.assignedSlot && element.assignedSlot !== parentSlot) {
         return "";
     }
 

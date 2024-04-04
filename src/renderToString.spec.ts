@@ -351,13 +351,23 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            <p>
+                EXPECTED
+            </p>
+        </slot>
+    </template>
+</host-element>"
+`);
     });
 
-    it("yields nested map slottedConten", () => {
+    it("yields nested map slottedContent", () => {
         const target = create("host-element")
-            .shadowHtml("<slot name='target'></slot>")
             .html("<p slot='target'>EXPECTED</p>")
+            .shadowHtml("<slot name='target'></slot>")
             .root();
 
         const actual = renderToString(target, {
@@ -365,7 +375,18 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot name="target">
+            #contents
+                <p slot="target">
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
     });
 
     it("returns slottedContent with single slotted element", () => {
@@ -376,7 +397,18 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <p>
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
     });
 
     it("returns slottedContent with multiple slotted elements", () => {
@@ -390,7 +422,24 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <div>
+                    One
+                </div>
+                <div>
+                    Two
+                </div>
+                <div>
+                    Three
+                </div>
+        </slot>
+    </template>
+</host-element>"
+`);
     });
 
     it("yields mapped slottedContent with nested slot element", () => {
@@ -401,7 +450,16 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <slot></slot>
+        </slot>
+    </template>
+</host-element>"
+`);
     });
 
     it("yields mapped slottedContent with nested slot element and assigned elements", () => {
@@ -414,7 +472,27 @@ describe("render w/ slottedContent map-contents", () => {
             slottedContent: "map-contents",
         } as any);
 
-        expect(actual).toMatchInlineSnapshot(`""`);
+        expect(actual).toMatchInlineSnapshot(`
+"<my-target>
+    <template shadowroot="open">
+        <host-element>
+            <template shadowroot="open">
+                <slot>
+                    #contents
+                        <div>
+                            <slot>
+                                #contents
+                                    <p>
+                                        EXPECTED
+                                    </p>
+                            </slot>
+                        </div>
+                </slot>
+            </template>
+        </host-element>
+    </template>
+</my-target>"
+`);
     });
 });
 
