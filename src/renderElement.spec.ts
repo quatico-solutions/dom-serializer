@@ -75,15 +75,15 @@ describe("renderElement()", () => {
         const actual = renderElement(target, { shadowDepth: 1, indent: "" } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div></div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div></div>
+    </template>
+</div>"
+`);
     });
 });
 
@@ -173,17 +173,17 @@ describe("filter attributes", () => {
         const actual = renderElement(target, { filterAttrs: ["id"], indent: "" } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <p align=\\"center\\">
-                    inside the element
-                </p>
-                <main>
-                    <button class=\\"favorite\\">
-                        click me I'm inside of a second element
-                    </button>
-                </main>
-            </div>"
-        `);
+"<div>
+    <p align="center">
+        inside the element
+    </p>
+    <main>
+        <button class="favorite">
+            click me I'm inside of a second element
+        </button>
+    </main>
+</div>"
+`);
     });
 });
 
@@ -219,5 +219,104 @@ describe("filter comments", () => {
                 </main>
             </div>"
         `);
+    });
+});
+
+describe("render w/ slottedContent ignore", () => {
+    it("returns slottedContent with default content", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<slot>
+    <p>
+        EXPECTED
+    </p>
+</slot>"
+`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`"<slot></slot>"`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+
+        expect(actual).toMatchInlineSnapshot(`"<slot></slot>"`);
+    });
+});
+
+describe("render w/ slottedContent reveal-contents", () => {
+    it("returns slottedContent with default content", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<slot>
+    <p>
+        EXPECTED
+    </p>
+</slot>"
+`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<slot>
+    #contents
+        <p>
+            EXPECTED
+        </p>
+</slot>"
+`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<slot>
+    #contents
+        <div>
+            One
+        </div>
+        <div>
+            Two
+        </div>
+        <div>
+            Three
+        </div>
+</slot>"
+`);
     });
 });

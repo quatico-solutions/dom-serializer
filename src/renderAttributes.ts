@@ -5,7 +5,7 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { INDENTATION } from "./renderIndentation";
-import { RenderOptions } from "./RenderOptions";
+import { InternalRenderOptions } from "./InternalRenderOptions";
 
 type AttributeOptions = {
     childIndent?: boolean;
@@ -16,7 +16,7 @@ type AttributeOptions = {
     multiLine?: boolean;
 };
 
-export const renderAttributes = (element: Element, { diffable, indent, filterAttrs }: RenderOptions) => {
+export const renderAttributes = (element: Element, { diffable, indent, filterAttrs }: InternalRenderOptions) => {
     const multiLine = element.attributes?.length > 1;
     if (element.attributes && element.attributes.length > 0) {
         return (

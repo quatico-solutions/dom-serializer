@@ -26,6 +26,7 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
         shadow = true,
         shadowDepth = Number.MAX_SAFE_INTEGER,
         shadowRoots = "declarative",
+        slottedContent,
     } = options;
     const element = value as Element;
     if (element && element.nodeType === Node.ELEMENT_NODE) {
@@ -38,6 +39,7 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
             shadow,
             shadowDepth,
             shadowRoots,
+            slottedContent,
         });
     }
     return "";

@@ -20,7 +20,7 @@ A markup serializer that renders the complete DOM structure, including shadow DO
 Add the `@quatico/dom-serializer` as (dev-) dependency to your project
 
 ```sh
-yarn add -D @quatico/dom-serializer
+pnpm add -D @quatico/dom-serializer
 ```
 
 ## Jest Serializer
@@ -81,6 +81,7 @@ The class DomSerializer provides the following `RenderOptions` to customize the 
 - `shadow`: Boolean to enable/disable the rendering of shadow DOM contents; defaults to true.
 - `shadowDepth`: Number of showRoots to be rendered; defaults to infinity.
 - `shadowRoots`: Controls how shadow roots are rendered. Defaults to "declarative".
+- `slottedContent`: Controls how slotted content is rendered. Show it as referenced child or copy to the slot element. Defaults to "ignore".
 
 ## Render a DOM structure as string
 

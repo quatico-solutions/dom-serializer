@@ -5,10 +5,10 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { InternalRenderOptions } from "./InternalRenderOptions";
-import { renderNodes } from "./renderNodes";
+import { renderNode } from "./renderNode";
 
-/**
- * Render all child nodes recursively of a given element or shadow root.
- */
-export const renderChildren = (element: Element | ShadowRoot, options: InternalRenderOptions): string =>
-    renderNodes(element?.childNodes || [], options);
+export const renderNodes = (nodes: NodeListOf<Node> | Node[] | undefined, options: InternalRenderOptions): string =>
+    Array.from(nodes || [])
+        .map(child => renderNode(child, options))
+        .filter(it => it.trim().length > 0)
+        .join("\n");

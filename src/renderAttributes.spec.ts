@@ -21,7 +21,7 @@ describe("renderAttributes", () => {
 
         const actual = renderAttributes(target, { indent: "", diffable: true, filterAttrs: [] } as any);
 
-        expect(actual).toMatchInlineSnapshot(`"class=\\"foo\\""`);
+        expect(actual).toMatchInlineSnapshot(`"class="foo""`);
     });
 
     it("returns attributes string with multiple attributes and diffable true", () => {
@@ -33,12 +33,12 @@ describe("renderAttributes", () => {
         const actual = renderAttributes(target, { indent: "", diffable: true, filterAttrs: [] } as any);
 
         expect(actual).toMatchInlineSnapshot(`
-            "
-                align=\\"center\\"
-                class=\\"foo\\"
-                id=\\"bar\\"
-            "
-        `);
+"
+    align="center"
+    class="foo"
+    id="bar"
+"
+`);
     });
 
     it("returns empty string with no attributes and diffable false", () => {
@@ -54,7 +54,7 @@ describe("renderAttributes", () => {
 
         const actual = renderAttributes(target, { indent: "", diffable: false, filterAttrs: [] } as any);
 
-        expect(actual).toMatchInlineSnapshot(`"class=\\"foo\\""`);
+        expect(actual).toMatchInlineSnapshot(`"class="foo""`);
     });
 
     it("returns attributes string with multiple attributes and diffable false", () => {
@@ -65,6 +65,6 @@ describe("renderAttributes", () => {
 
         const actual = renderAttributes(target, { indent: "", diffable: false, filterAttrs: [] } as any);
 
-        expect(actual).toMatchInlineSnapshot(`"align=\\"center\\" class=\\"foo\\" id=\\"bar\\""`);
+        expect(actual).toMatchInlineSnapshot(`"align="center" class="foo" id="bar""`);
     });
 });

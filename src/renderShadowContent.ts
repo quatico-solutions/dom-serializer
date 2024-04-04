@@ -5,13 +5,16 @@
  * ---------------------------------------------------------------------------------------------
  */
 import { INDENTATION } from "./renderIndentation";
-import { RenderOptions } from "./RenderOptions";
+import { InternalRenderOptions } from "./InternalRenderOptions";
 
 /**
  * Renders a given element string into as shadow content, either as declarative shadow root (HTML compliant)
  * or as a more readable version used by browser devtools.
  */
-export const renderShadowContent = (element: string, { shadowRoots, indent }: Partial<RenderOptions>): string => {
+export const renderShadowContent = (
+    element: string,
+    { shadowRoots, indent }: Partial<InternalRenderOptions>
+): string => {
     if (shadowRoots === "devtools") {
         return `${indent + INDENTATION}#shadowRoot\n${element}`;
     }

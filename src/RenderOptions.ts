@@ -31,6 +31,14 @@ export interface RenderOptions {
     shadow?: boolean;
 
     /**
+     * Controls how slotted content is rendered. "reveal-contents" shows it as
+     * referenced child to the slot element as well as in its original position.
+     * "map-contents" moves it into the slot element. Defaults to "ignore", which
+     * leaves slotted content in its original position.
+     */
+    slottedContent?: "reveal-contents" | "map-contents" | "ignore";
+
+    /**
      * Boolean to add extra line breaks for better comparablity; defaults to true.
      */
     diffable: boolean;
@@ -49,4 +57,6 @@ export interface RenderOptions {
      * Array of lowercase attributes names that are filtered out of the snapshot; defaults to [].
      */
     filterAttrs?: string[];
+
+    parentSlot?: HTMLSlotElement;
 }

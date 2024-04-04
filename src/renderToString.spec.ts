@@ -22,14 +22,14 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with string attribute", () => {
@@ -44,21 +44,21 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <input 
-                        aria-required=\\"true\\"
-                        id=\\"name\\"
-                        maxlength=\\"8\\"
-                        minlength=\\"4\\"
-                        name=\\"name\\"
-                        required=\\"\\"
-                        size=\\"10\\"
-                        type=\\"text\\"
-                     />
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <input 
+            aria-required="true"
+            id="name"
+            maxlength="8"
+            minlength="4"
+            name="name"
+            required=""
+            size="10"
+            type="text"
+         />
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with void tag", () => {
@@ -67,12 +67,12 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <br />
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <br />
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including shadow dom with spaces", () => {
@@ -93,20 +93,20 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <a 
-                        class=\\"link link--display-inline-block link--bg\\"
-                        href=\\"expectedUrl\\"
-                        target=\\"_self\\"
-                    >
-                        
-                            Whatever
-                        
-                    </a>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <a 
+            class="link link--display-inline-block link--bg"
+            href="expectedUrl"
+            target="_self"
+        >
+            
+                Whatever
+            
+        </a>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including multiple levels of shadow dom", () => {
@@ -118,21 +118,21 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div>
-                        <template shadowroot=\\"open\\">
-                            <button>
-                                click me I'm inside of a second root
-                            </button>
-                        </template>
-                    </div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div>
+            <template shadowroot="open">
+                <button>
+                    click me I'm inside of a second root
+                </button>
+            </template>
+        </div>
+    </template>
+</div>"
+`);
     });
 
     it("returns markup including light-dom children along shadow dom", () => {
@@ -141,17 +141,17 @@ describe("renderToString()", () => {
         const actual = renderToString(target);
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                </template>
-                <pre>
-                    I'm outside
-                </pre>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+    </template>
+    <pre>
+        I'm outside
+    </pre>
+</div>"
+`);
     });
 
     it("returns only light-dom markup with shadowDepth option set to 0", () => {
@@ -191,15 +191,15 @@ describe("renderToString()", () => {
         const actual = renderToString(target, { shadowDepth: 1 });
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <template shadowroot=\\"open\\">
-                    <p>
-                        inside
-                    </p>
-                    <div></div>
-                </template>
-            </div>"
-        `);
+"<div>
+    <template shadowroot="open">
+        <p>
+            inside
+        </p>
+        <div></div>
+    </template>
+</div>"
+`);
     });
 });
 
@@ -289,21 +289,21 @@ describe("filter attributes", () => {
         const actual = renderToString(target, { filterAttrs: ["id"] });
 
         expect(actual).toMatchInlineSnapshot(`
-            "<div>
-                <p 
-                    align=\\"center\\"
-                >
-                    inside the element
-                </p>
-                <main>
-                    <button 
-                        class=\\"favorite\\"
-                    >
-                        click me I'm inside of a second element
-                    </button>
-                </main>
-            </div>"
-        `);
+"<div>
+    <p 
+        align="center"
+    >
+        inside the element
+    </p>
+    <main>
+        <button 
+            class="favorite"
+        >
+            click me I'm inside of a second element
+        </button>
+    </main>
+</div>"
+`);
     });
 });
 
@@ -339,5 +339,340 @@ describe("filter comments", () => {
                 </main>
             </div>"
         `);
+    });
+});
+
+describe("render w/ slottedContent map-contents", () => {
+    it("returns slottedContent with default content", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            <p>
+                EXPECTED
+            </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("yields nested map slottedContent", () => {
+        const target = create("host-element")
+            .html("<p slot='target'>EXPECTED</p>")
+            .shadowHtml("<slot name='target'></slot>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot name="target">
+            #contents
+                <p slot="target">
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <p>
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <div>
+                    One
+                </div>
+                <div>
+                    Two
+                </div>
+                <div>
+                    Three
+                </div>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<slot></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <slot></slot>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element and assigned elements", () => {
+        const nested = create("div").html("<slot><p>Whatever</p></slot>").root();
+        const host = create("host-element").shadowHtml("<slot><p>Whatever</p></slot>").elements(nested).root();
+        const target = create("my-target").html("<p>EXPECTED</p>").shadowElements(host).root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<my-target>
+    <template shadowroot="open">
+        <host-element>
+            <template shadowroot="open">
+                <slot>
+                    #contents
+                        <div>
+                            <slot>
+                                #contents
+                                    <p>
+                                        EXPECTED
+                                    </p>
+                            </slot>
+                        </div>
+                </slot>
+            </template>
+        </host-element>
+    </template>
+</my-target>"
+`);
+    });
+});
+
+describe("render w/ slottedContent reveal-contents", () => {
+    it("nested yie mappe", () => {
+        const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            <p>
+                EXPECTED
+            </p>
+        </slot>
+    </template>
+</host-element>"
+`);
+    });
+
+    it("yields nested map slottedConten", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot name='target'></slot>")
+            .html("<p slot='target'>EXPECTED</p>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot name="target">
+            #contents
+                <p slot="target">
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+    <p slot="target">
+        EXPECTED
+    </p>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with single slotted element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <p>
+                    EXPECTED
+                </p>
+        </slot>
+    </template>
+    <p>
+        EXPECTED
+    </p>
+</host-element>"
+`);
+    });
+
+    it("returns slottedContent with multiple slotted elements", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <div>
+                    One
+                </div>
+                <div>
+                    Two
+                </div>
+                <div>
+                    Three
+                </div>
+        </slot>
+    </template>
+    <div>
+        One
+    </div>
+    <div>
+        Two
+    </div>
+    <div>
+        Three
+    </div>
+</host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element", () => {
+        const target = create("host-element").shadowHtml("<slot></slot>").html("<slot></slot>").root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<host-element>
+    <template shadowroot="open">
+        <slot>
+            #contents
+                <slot></slot>
+        </slot>
+    </template>
+    <slot></slot>
+</host-element>"
+`);
+    });
+
+    it("yields mapped slottedContent with nested slot element and assigned elements", () => {
+        const nested = create("div").html("<slot><p>Whatever</p></slot>").root();
+        const host = create("host-element").shadowHtml("<slot><p>Whatever</p></slot>").elements(nested).root();
+        const target = create("my-target").html("<p>EXPECTED</p>").shadowElements(host).root();
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "reveal-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+"<my-target>
+    <template shadowroot="open">
+        <host-element>
+            <template shadowroot="open">
+                <slot>
+                    #contents
+                        <div>
+                            <slot>
+                                #contents
+                                    <p>
+                                        EXPECTED
+                                    </p>
+                            </slot>
+                        </div>
+                </slot>
+            </template>
+            <div>
+                <slot>
+                    #contents
+                        <p>
+                            EXPECTED
+                        </p>
+                </slot>
+            </div>
+        </host-element>
+    </template>
+    <p>
+        EXPECTED
+    </p>
+</my-target>"
+`);
     });
 });

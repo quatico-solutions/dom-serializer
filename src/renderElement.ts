@@ -8,17 +8,22 @@ import { isVoidTag } from "./isVoidTag";
 import { renderAttributes } from "./renderAttributes";
 import { renderChildren } from "./renderChildren";
 import { INDENTATION } from "./renderIndentation";
-import { RenderOptions } from "./RenderOptions";
+import { InternalRenderOptions } from "./InternalRenderOptions";
 import { renderShadowContent } from "./renderShadowContent";
+import { renderSlot } from "./renderSlot";
 
 /**
  * Renders a given element into a string value, including its shadow DOM, if configured.
  */
-export const renderElement = (element: Element, options: RenderOptions): string => {
-    const { indent, shadowDepth, filterTags } = options;
+export const renderElement = (element: Element, options: InternalRenderOptions): string => {
+    const { indent, shadowDepth, filterTags, slottedContent, parentSlot } = options;
     const tagName = element.nodeName.toLowerCase() || "";
 
     if ((filterTags || []).includes(tagName)) {
+        return "";
+    }
+
+    if (slottedContent === "map-contents" && !!element.assignedSlot && element.assignedSlot !== parentSlot) {
         return "";
     }
 
@@ -37,7 +42,13 @@ export const renderElement = (element: Element, options: RenderOptions): string 
         );
     }
 
-    if (element.hasChildNodes()) {
+    if (slottedContent && slottedContent !== "ignore" && element instanceof HTMLSlotElement) {
+        childContent = renderSlot(element, {
+            ...options,
+            indent: indent + INDENTATION,
+            shadowDepth: shadowDepth - 1,
+        });
+    } else if (element.hasChildNodes()) {
         childContent = renderChildren(element, {
             ...options,
             indent: indent + INDENTATION,
