@@ -1,0 +1,24 @@
+name: Continous Build Multi (Branch Lint, Build, Test)
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+  workflow_dispatch:
+
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test
+      - run: pnpm build
