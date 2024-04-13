@@ -17,6 +17,14 @@
 - Improvement :gift_heart:: TBD
 - Bugfix :pill:: TBD
 
+## v0.6.1
+
+> 2024-04-13
+
+### Bugfix Release
+
+- Bugfix :pill:: Fixes an issues where installing the package would fail due to unmet engine requirements.
+
 ## v0.6.0
 
 > 2024-04-04
