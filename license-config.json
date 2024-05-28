@@ -25,6 +25,7 @@
     "ignore": [
         "**/*.!(ts|tsx|js|jsx|scss|spec.ts|test.ts|config.js|stories.js|stories.mdx|mdx|md)",
         "**/__snapshots__",
+        "bin",
         ".git",
         ".idea",
         "TODO.md",
