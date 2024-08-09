@@ -23,7 +23,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <p>
             inside
         </p>
@@ -45,7 +45,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <input 
             aria-required="true"
             id="name"
@@ -68,7 +68,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <br />
     </template>
 </div>"
@@ -94,7 +94,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <a 
             class="link link--display-inline-block link--bg"
             href="expectedUrl"
@@ -119,12 +119,12 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <p>
             inside
         </p>
         <div>
-            <template shadowroot="open">
+            <template shadowrootmode="open">
                 <button>
                     click me I'm inside of a second root
                 </button>
@@ -142,7 +142,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <p>
             inside
         </p>
@@ -192,7 +192,7 @@ describe("renderToString()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <p>
             inside
         </p>
@@ -353,7 +353,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             <p>
                 EXPECTED
@@ -377,7 +377,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot name="target">
             #contents
                 <p slot="target">
@@ -399,7 +399,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <p>
@@ -424,7 +424,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <div>
@@ -452,7 +452,7 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <slot></slot>
@@ -474,9 +474,9 @@ describe("render w/ slottedContent map-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<my-target>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <host-element>
-            <template shadowroot="open">
+            <template shadowrootmode="open">
                 <slot>
                     #contents
                         <div>
@@ -507,7 +507,7 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             <p>
                 EXPECTED
@@ -531,7 +531,7 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot name="target">
             #contents
                 <p slot="target">
@@ -556,7 +556,7 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <p>
@@ -584,7 +584,7 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <div>
@@ -621,7 +621,7 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<host-element>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <slot>
             #contents
                 <slot></slot>
@@ -644,9 +644,9 @@ describe("render w/ slottedContent reveal-contents", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<my-target>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <host-element>
-            <template shadowroot="open">
+            <template shadowrootmode="open">
                 <slot>
                     #contents
                         <div>

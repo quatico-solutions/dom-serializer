@@ -13,7 +13,7 @@ describe("renderShadowContent", () => {
         const actual = renderShadowContent(target, { indent: "" });
 
         expect(actual).toMatchInlineSnapshot(`
-"    <template shadowroot="open">
+"    <template shadowrootmode="open">
 EXPECTED
     </template>"
 `);
@@ -25,7 +25,7 @@ EXPECTED
         const actual = renderShadowContent(target, { indent: "", shadowRoots: "declarative" });
 
         expect(actual).toMatchInlineSnapshot(`
-"    <template shadowroot="open">
+"    <template shadowrootmode="open">
 EXPECTED
     </template>"
 `);
