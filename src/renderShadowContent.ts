@@ -18,5 +18,5 @@ export const renderShadowContent = (
     if (shadowRoots === "devtools") {
         return `${indent + INDENTATION}#shadowRoot\n${element}`;
     }
-    return `${indent + INDENTATION}<template shadowroot="open">\n${element}\n${indent + INDENTATION}</template>`;
+    return `${indent + INDENTATION}<template shadowrootmode="open">\n${element}\n${indent + INDENTATION}</template>`;
 };

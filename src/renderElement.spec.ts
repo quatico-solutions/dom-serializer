@@ -76,7 +76,7 @@ describe("renderElement()", () => {
 
         expect(actual).toMatchInlineSnapshot(`
 "<div>
-    <template shadowroot="open">
+    <template shadowrootmode="open">
         <p>
             inside
         </p>
