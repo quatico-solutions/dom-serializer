@@ -11,7 +11,12 @@ describe("renderChildren", () => {
     it("returns innerHTML with element", () => {
         const target = create("div").html("<p>EXPECTED</p>").root();
 
-        const actual = renderChildren(target, { indent: "" } as any);
+        const actual = renderChildren(target, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p>
@@ -23,7 +28,12 @@ describe("renderChildren", () => {
     it("returns empty string with empty tag", () => {
         const target = create("div").root();
 
-        const actual = renderChildren(target, { indent: "" } as any);
+        const actual = renderChildren(target, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toBe("");
     });

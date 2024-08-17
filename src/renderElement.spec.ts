@@ -11,7 +11,12 @@ describe("renderElement()", () => {
     it("returns outerHTML for single element", () => {
         const target = create("div", false).root();
 
-        const actual = renderElement(target, { indent: "" } as any);
+        const actual = renderElement(target, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toBe("<div></div>");
     });
@@ -19,7 +24,12 @@ describe("renderElement()", () => {
     it("returns element markup without shadow dom", () => {
         const target = create("div").shadowHtml(`<p>inside</p>`).root();
 
-        const actual = renderElement(target, { indent: "" } as any);
+        const actual = renderElement(target, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"<div></div>"`);
     });
@@ -27,7 +37,12 @@ describe("renderElement()", () => {
     it("returns markup including innerHTML w/o shadow root child", () => {
         const target = create("div").html(`<pre>I'm outside</pre>`).shadowHtml(`<p>inside</p>`).root();
 
-        const actual = renderElement(target, { indent: "", shadowDepths: Number.POSITIVE_INFINITY } as any);
+        const actual = renderElement(target, {
+            indent: "",
+            shadowDepth: 0,
+            diffable: true,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -41,7 +56,12 @@ describe("renderElement()", () => {
     it("returns only light-dom markup with shadowDepth option set to 0", () => {
         const target = create("div").html(`<pre>I'm outside</pre>`).shadowHtml(`<p>inside</p>`).root();
 
-        const actual = renderElement(target, { shadowDepth: 0, indent: "" } as any);
+        const actual = renderElement(target, {
+            shadowDepth: 0,
+            indent: "",
+            diffable: true,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -55,7 +75,13 @@ describe("renderElement()", () => {
     it("returns only light-dom markup with no shadowDepth set but dom set to 'light'", () => {
         const target = create("div").html(`<pre>I'm outside</pre>`).shadowHtml(`<p>inside</p>`).root();
 
-        const actual = renderElement(target, { shadow: false, indent: "" } as any);
+        const actual = renderElement(target, {
+            shadow: false,
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -72,18 +98,23 @@ describe("renderElement()", () => {
             .shadowElements(create("div").shadowHtml(`<button>click me I'm inside of a second root</button>`).root())
             .root();
 
-        const actual = renderElement(target, { shadowDepth: 1, indent: "" } as any);
+        const actual = renderElement(target, {
+            shadowDepth: 1,
+            indent: "",
+            diffable: true,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<div>
-    <template shadowrootmode="open">
-        <p>
-            inside
-        </p>
-        <div></div>
-    </template>
-</div>"
-`);
+            "<div>
+                <template shadowrootmode="open">
+                    <p>
+                        inside
+                    </p>
+                    <div></div>
+                </template>
+            </div>"
+        `);
     });
 });
 
@@ -94,7 +125,13 @@ describe("filter tags", () => {
             .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
             .root();
 
-        const actual = renderElement(target, { filterTags: ["div"], indent: "" } as any);
+        const actual = renderElement(target, {
+            filterTags: ["div"],
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`""`);
     });
@@ -105,7 +142,13 @@ describe("filter tags", () => {
             .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
             .root();
 
-        const actual = renderElement(target, { filterTags: ["button", "main"], indent: "" } as any);
+        const actual = renderElement(target, {
+            filterTags: ["button", "main"],
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -122,7 +165,13 @@ describe("filter tags", () => {
             .elements(create("main").html(`<button>click me I'm inside of a second element</button>`).root())
             .root();
 
-        const actual = renderElement(target, { filterTags: ["button"], indent: "" } as any);
+        const actual = renderElement(target, {
+            filterTags: ["button"],
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -144,7 +193,13 @@ describe("filter attributes", () => {
             )
             .root();
 
-        const actual = renderElement(target, { filterAttrs: ["id"], indent: "" } as any);
+        const actual = renderElement(target, {
+            filterAttrs: ["id"],
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -170,20 +225,30 @@ describe("filter attributes", () => {
             )
             .root();
 
-        const actual = renderElement(target, { filterAttrs: ["id"], indent: "" } as any);
+        const actual = renderElement(target, {
+            filterAttrs: ["id"],
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<div>
-    <p align="center">
-        inside the element
-    </p>
-    <main>
-        <button class="favorite">
-            click me I'm inside of a second element
-        </button>
-    </main>
-</div>"
-`);
+            "<div>
+                <p 
+                    align="center"
+                >
+                    inside the element
+                </p>
+                <main>
+                    <button 
+                        class="favorite"
+                    >
+                        click me I'm inside of a second element
+                    </button>
+                </main>
+            </div>"
+        `);
     });
 });
 
@@ -194,7 +259,13 @@ describe("filter comments", () => {
             .elements(create("main").html(`<!-- comment -->`).root())
             .root();
 
-        const actual = renderElement(target, { filterComments: true, indent: "" } as any);
+        const actual = renderElement(target, {
+            filterComments: true,
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -209,7 +280,13 @@ describe("filter comments", () => {
             .elements(create("main").html(`<!-- comment -->`).root())
             .root();
 
-        const actual = renderElement(target, { filterComments: false, indent: "" } as any);
+        const actual = renderElement(target, {
+            filterComments: false,
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -226,21 +303,31 @@ describe("render w/ slottedContent ignore", () => {
     it("returns slottedContent with default content", () => {
         const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
 
-        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<slot>
-    <p>
-        EXPECTED
-    </p>
-</slot>"
-`);
+            "<slot>
+                <p>
+                    EXPECTED
+                </p>
+            </slot>"
+        `);
     });
 
     it("returns slottedContent with single slotted element", () => {
         const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
 
-        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"<slot></slot>"`);
     });
@@ -251,7 +338,12 @@ describe("render w/ slottedContent ignore", () => {
             .html("<div>One</div><div>Two</div><div>Three</div>")
             .root();
 
-        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+        const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"<slot></slot>"`);
     });
@@ -264,15 +356,18 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<slot>
-    <p>
-        EXPECTED
-    </p>
-</slot>"
-`);
+            "<slot>
+                <p>
+                    EXPECTED
+                </p>
+            </slot>"
+        `);
     });
 
     it("returns slottedContent with single slotted element", () => {
@@ -281,16 +376,19 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<slot>
-    #contents
-        <p>
-            EXPECTED
-        </p>
-</slot>"
-`);
+            "<slot>
+                #contents
+                    <p>
+                        EXPECTED
+                    </p>
+            </slot>"
+        `);
     });
 
     it("returns slottedContent with multiple slotted elements", () => {
@@ -302,21 +400,24 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderElement(target.shadowRoot!.querySelector("slot")!, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
-"<slot>
-    #contents
-        <div>
-            One
-        </div>
-        <div>
-            Two
-        </div>
-        <div>
-            Three
-        </div>
-</slot>"
-`);
+            "<slot>
+                #contents
+                    <div>
+                        One
+                    </div>
+                    <div>
+                        Two
+                    </div>
+                    <div>
+                        Three
+                    </div>
+            </slot>"
+        `);
     });
 });

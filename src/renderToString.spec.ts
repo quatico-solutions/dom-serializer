@@ -314,7 +314,7 @@ describe("filter comments", () => {
             .elements(create("main").html(`<!-- comment -->`).root())
             .root();
 
-        const actual = renderToString(target, { indent: "" } as any);
+        const actual = renderToString(target, { indent: "" });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -329,7 +329,7 @@ describe("filter comments", () => {
             .elements(create("main").html(`<!-- comment -->`).root())
             .root();
 
-        const actual = renderToString(target, { filterComments: false, indent: "" } as any);
+        const actual = renderToString(target, { filterComments: false, indent: "" });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -349,7 +349,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -373,7 +373,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -395,7 +395,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -420,7 +420,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -448,7 +448,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -470,7 +470,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<my-target>
@@ -503,7 +503,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -527,7 +527,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -552,7 +552,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -580,7 +580,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -617,7 +617,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<host-element>
@@ -640,7 +640,7 @@ describe("render w/ slottedContent reveal-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "reveal-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<my-target>
