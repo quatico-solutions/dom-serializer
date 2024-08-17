@@ -18,15 +18,21 @@ describe("renderNode", () => {
     it("calls renderElement with HTML element", () => {
         const target = create("div").root();
 
-        renderNode(target, { indent: "" } as any);
+        renderNode(target, { indent: "", diffable: true, shadowDepth: 0, shadowRoots: "declarative" });
 
-        expect(renderElement).toHaveBeenCalledWith(target, { indent: "" });
+        expect(renderElement).toHaveBeenCalledWith(target, {
+            indent: "",
+            root: false,
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
     });
 
     it("should not call renderElement with text content", () => {
         const target = document.createTextNode("target");
 
-        renderNode(target, { indent: "" } as any);
+        renderNode(target, { indent: "", diffable: true, shadowDepth: 0, shadowRoots: "declarative" });
 
         expect(renderElement).not.toHaveBeenCalled();
     });
@@ -35,7 +41,7 @@ describe("renderNode", () => {
         const target = create("div").root();
         (renderElement as jest.Mock).mockReturnValue("EXPECTED");
 
-        const actual = renderNode(target, { indent: "" } as any);
+        const actual = renderNode(target, { indent: "", diffable: true, shadowDepth: 0, shadowRoots: "declarative" });
 
         expect(actual).toBe("EXPECTED");
     });
@@ -43,7 +49,7 @@ describe("renderNode", () => {
     it("yields text value with text content", () => {
         const target = document.createTextNode("target");
 
-        const actual = renderNode(target, { indent: "" } as any);
+        const actual = renderNode(target, { indent: "", diffable: true, shadowDepth: 0, shadowRoots: "declarative" });
 
         expect(actual).toBe("target");
     });

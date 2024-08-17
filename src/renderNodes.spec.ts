@@ -11,7 +11,12 @@ describe("renderNodes", () => {
     it("returns innerHTML with single child element", () => {
         const target = create("div").html("<p>EXPECTED</p>").root();
 
-        const actual = renderNodes(target.childNodes, { indent: "" } as any);
+        const actual = renderNodes(target.childNodes, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p>
@@ -23,7 +28,12 @@ describe("renderNodes", () => {
     it("returns innerHTML with multiple children", () => {
         const target = create("div").html("<div>One</div><div>Two</div><div>Three</div>").root();
 
-        const actual = renderNodes(target.childNodes, { indent: "" } as any);
+        const actual = renderNodes(target.childNodes, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -41,8 +51,12 @@ describe("renderNodes", () => {
     it("returns slottedContent with default content", () => {
         const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
 
-        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.childNodes, { indent: "" } as any);
-
+        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.childNodes, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p>
@@ -54,8 +68,12 @@ describe("renderNodes", () => {
     it("returns slottedContent with single slotted element", () => {
         const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
 
-        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.assignedNodes(), { indent: "" } as any);
-
+        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.assignedNodes(), {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p>
@@ -65,9 +83,17 @@ describe("renderNodes", () => {
     });
 
     it("returns slottedContent with multiple slotted elements", () => {
-        const target = create("host-element").shadowHtml("<slot></slot>").html("<div>One</div><div>Two</div><div>Three</div>").root();
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
 
-        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.assignedNodes(), { indent: "" } as any);
+        const actual = renderNodes(target.shadowRoot!.querySelector("slot")!.assignedNodes(), {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<div>
@@ -83,7 +109,7 @@ describe("renderNodes", () => {
     });
 
     it("returns empty string with empty nodeList", () => {
-        const actual = renderNodes([], { indent: "" } as any);
+        const actual = renderNodes([], { indent: "", diffable: true, shadowDepth: 0, shadowRoots: "declarative" });
 
         expect(actual).toBe("");
     });

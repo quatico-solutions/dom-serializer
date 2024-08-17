@@ -7,12 +7,16 @@
 import { create } from "./custom-element";
 import { renderSlot } from "./renderSlot";
 
-describe('renderSlot()', () => {
+describe("renderSlot()", () => {
     it("returns slottedContent with default content", () => {
         const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
 
-        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
-
+        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p>
@@ -24,8 +28,12 @@ describe('renderSlot()', () => {
     it("returns slottedContent with single slotted element", () => {
         const target = create("host-element").shadowHtml("<slot></slot>").html("<p>EXPECTED</p>").root();
 
-        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
-
+        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
 "#contents
@@ -36,9 +44,17 @@ describe('renderSlot()', () => {
     });
 
     it("returns slottedContent with multiple slotted elements", () => {
-        const target = create("host-element").shadowHtml("<slot></slot>").html("<div>One</div><div>Two</div><div>Three</div>").root();
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<div>One</div><div>Two</div><div>Three</div>")
+            .root();
 
-        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, { indent: "" } as any);
+        const actual = renderSlot(target.shadowRoot!.querySelector("slot")!, {
+            indent: "",
+            diffable: true,
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
 "#contents

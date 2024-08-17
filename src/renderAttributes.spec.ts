@@ -11,7 +11,13 @@ describe("renderAttributes", () => {
     it("returns empty string with no attributes and diffable true", () => {
         const target = create("div").html("<p>target</p>").root().querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: true, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: true,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`""`);
     });
@@ -19,7 +25,13 @@ describe("renderAttributes", () => {
     it("returns attributes string with single attribute and diffable true", () => {
         const target = create("div").html("<p class='foo'>target</p>").root().querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: true, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: true,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"class="foo""`);
     });
@@ -30,7 +42,13 @@ describe("renderAttributes", () => {
             .root()
             .querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: true, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: true,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`
 "
@@ -44,7 +62,13 @@ describe("renderAttributes", () => {
     it("returns empty string with no attributes and diffable false", () => {
         const target = create("div").html("<p>target</p>").root().querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: false, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: false,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`""`);
     });
@@ -52,7 +76,13 @@ describe("renderAttributes", () => {
     it("returns attributes string with single attribute and diffable false", () => {
         const target = create("div").html("<p class='foo'>target</p>").root().querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: false, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: false,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"class="foo""`);
     });
@@ -63,7 +93,13 @@ describe("renderAttributes", () => {
             .root()
             .querySelector("p") as Element;
 
-        const actual = renderAttributes(target, { indent: "", diffable: false, filterAttrs: [] } as any);
+        const actual = renderAttributes(target, {
+            indent: "",
+            diffable: false,
+            filterAttrs: [],
+            shadowDepth: 0,
+            shadowRoots: "declarative",
+        });
 
         expect(actual).toMatchInlineSnapshot(`"align="center" class="foo" id="bar""`);
     });
