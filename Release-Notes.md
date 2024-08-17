@@ -18,6 +18,13 @@ Release notes follow the [keep a changelog](https://keepachangelog.com/en/1.0.0/
 - Improvement :gift_heart:: TBD
 - Bugfix :pill:: TBD
 
+## [0.6.3]- 2024-08-17
+
+### Changed
+
+- Improvement :gift_heart:: Use new `shadowrootmode` attribute for declarative shadow roots
+- Bugfix :pill:: Fixes an issue where root elements are filtered when 'map-contents' is used for slotted elements
+
 ## [0.6.2] - 2024-05-29
 
 Bugfix release to address installation issues with preinstall scripts.
