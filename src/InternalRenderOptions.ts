@@ -9,4 +9,5 @@ import { RenderOptions } from "./RenderOptions";
 
 export interface InternalRenderOptions extends RenderOptions {
     parentSlot?: HTMLSlotElement;
+    root?: boolean;
 }

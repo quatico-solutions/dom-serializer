@@ -40,6 +40,7 @@ export const renderToString: RenderFn = (value: unknown, options: Partial<Render
             shadowDepth,
             shadowRoots,
             slottedContent,
+            root: true,
         });
     }
     return "";

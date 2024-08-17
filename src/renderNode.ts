@@ -13,7 +13,7 @@ import { renderElement } from "./renderElement";
 export const renderNode = (node: Node, options: InternalRenderOptions): string => {
     switch (node?.nodeType) {
         case Node.ELEMENT_NODE:
-            return renderElement(node as Element, options);
+            return renderElement(node as Element, { ...options, root: false });
         case Node.TEXT_NODE:
             return options.indent + (node as Text).data;
         case Node.COMMENT_NODE:

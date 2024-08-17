@@ -16,14 +16,14 @@ import { renderSlot } from "./renderSlot";
  * Renders a given element into a string value, including its shadow DOM, if configured.
  */
 export const renderElement = (element: Element, options: InternalRenderOptions): string => {
-    const { indent, shadowDepth, filterTags, slottedContent, parentSlot } = options;
+    const { indent, shadowDepth, filterTags, slottedContent, parentSlot, root } = options;
     const tagName = element.nodeName.toLowerCase() || "";
 
     if ((filterTags || []).includes(tagName)) {
         return "";
     }
 
-    if (slottedContent === "map-contents" && !!element.assignedSlot && element.assignedSlot !== parentSlot) {
+    if (!root && slottedContent === "map-contents" && !!element.assignedSlot && element.assignedSlot !== parentSlot) {
         return "";
     }
 

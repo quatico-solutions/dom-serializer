@@ -20,7 +20,7 @@ describe("renderNode", () => {
 
         renderNode(target, { indent: "" } as any);
 
-        expect(renderElement).toHaveBeenCalledWith(target, { indent: "" });
+        expect(renderElement).toHaveBeenCalledWith(target, { indent: "", root: false });
     });
 
     it("should not call renderElement with text content", () => {
