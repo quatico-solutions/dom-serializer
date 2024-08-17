@@ -343,6 +343,71 @@ describe("filter comments", () => {
 });
 
 describe("render w/ slottedContent map-contents", () => {
+    it("returns slottedContent with selected slotted element", () => {
+        const target = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<p class='target'>EXPECTED</p>")
+            .root()
+            .querySelector(".target");
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<p class="target">
+                EXPECTED
+            </p>"
+        `);
+    });
+
+    it("yields mapped slottedContent with nested selected slotted element and assigned elements", () => {
+        const nested = create("div").html("<slot><p class='target'>EXPECTED</p></slot>").root();
+        const host = create("host-element").shadowHtml("<slot><p>Whatever</p></slot>").elements(nested).root();
+        const target = create("my-target")
+            .html("<p>Whatever</p>")
+            .shadowElements(host)
+            .root()
+            .shadowRoot!.querySelector(".target");
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<p class="target">
+                EXPECTED
+            </p>"
+        `);
+    });
+
+    it("yields mapped slottedContent with nested slot element and selected assigned elements", () => {
+        const nested = create("div").html("<slot><p>Whatever</p></slot>").root();
+        const host = create("host-element")
+            .shadowHtml("<slot></slot>")
+            .html("<p class='target'>EXPECTED</p>")
+            .elements(nested)
+            .root();
+        const target = create("my-target")
+            .html("<p>Whatever</p>")
+            .shadowElements(host)
+            .root()
+            .shadowRoot!.querySelector(".target");
+
+        const actual = renderToString(target, {
+            indent: "",
+            slottedContent: "map-contents",
+        } as any);
+
+        expect(actual).toMatchInlineSnapshot(`
+            "<p class="target">
+                EXPECTED
+            </p>"
+        `);
+    });
+
     it("returns slottedContent with default content", () => {
         const target = create("host-element").shadowHtml("<slot><p>EXPECTED</p></slot>").root();
 
