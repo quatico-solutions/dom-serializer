@@ -353,7 +353,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p class="target">
@@ -374,7 +374,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p class="target">
@@ -399,7 +399,7 @@ describe("render w/ slottedContent map-contents", () => {
         const actual = renderToString(target, {
             indent: "",
             slottedContent: "map-contents",
-        } as any);
+        });
 
         expect(actual).toMatchInlineSnapshot(`
             "<p class="target">
