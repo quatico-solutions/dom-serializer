@@ -1,6 +1,6 @@
 {
     "name": "@quatico/dom-serializer",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "description": "A DOM serializer for web components",
     "keywords": [
         "shadow DOM",
